@@ -1,7 +1,14 @@
 groceries_dir = load '/Users/cbohara/tools/pig-0.16.0/pluralsight/data/groceries_dir/' using PigStorage(','); -- reads in csv data
 dump groceries_dir; -- prints to stdout
 
-groceries = load '/Users/cbohara/tools/pig-0.16.0/pluralsight/data/groceries.csv' using PigStorage(',') as (order_id: chararray, location: chararray, product: chararray, day: datetime, revenue: double); -- specify schema
+groceries = load '/Users/cbohara/tools/pig-0.16.0/pluralsight/data/groceries.csv' using PigStorage(',') 
+as (
+order_id: chararray, 
+location: chararray, 
+product: chararray, 
+day: datetime, 
+revenue: double); -- specify schema
+
 describe groceries; -- prints schema to stdout
 dump groceries;
 
