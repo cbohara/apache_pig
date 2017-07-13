@@ -2,12 +2,14 @@ groceries_dir = load '/Users/cbohara/tools/pig-0.16.0/pluralsight/data/groceries
 dump groceries_dir; -- prints to stdout
 
 groceries = load '/Users/cbohara/tools/pig-0.16.0/pluralsight/data/groceries.csv' using PigStorage(',') 
-as (
+as 
+(
 order_id: chararray, 
 location: chararray, 
 product: chararray, 
 day: datetime, 
-revenue: double); -- specify schema
+revenue: double
+); -- specify schema
 
 describe groceries; -- prints schema to stdout
 dump groceries;
@@ -24,3 +26,7 @@ groceries_subset = limit groceries 5; -- use limit to grab subset of original re
 dump groceries_subset;
 
 store groceries_subset into '/Users/cbohara/tools/pig-0.16.0/pluralsight/data/subset_dir/' using PigStorage(','); -- writes comma delimited data into directory and directory cannot already exist 
+
+groceries_order_bag = foreach groceries generate $0, $1, TOTUPLE($2, $4); -- TOTUPLE creates tuple with elements at index 2 and 4 from groceries relation
+describe groceries_order_bag;
+dump groceries_order_bag;
