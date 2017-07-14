@@ -11,3 +11,5 @@ describe students;
 student_info = foreach students generate $1, $3.$0, $3.$1; -- use . to access fields in tuple
 dump student_info;
 
+student_info_bag = foreach students generate TOTUPLE($0, $1, $2), $3;
+dump student_info_bag;
