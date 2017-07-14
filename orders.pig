@@ -39,3 +39,11 @@ dump tv_orders;
 
 speaker_orders = filter orders by product matches '.*speakers*.';
 dump speaker_orders;
+
+split orders into order_one if (quantity == 1), order_many if (quantity > 1);
+dump order_one;
+dump order_many;
+
+split orders into order_with_username if (username is not null), order_missing_username if (username is null and order_id is not null);
+dump order_with_username;
+dump order_missing_username;
