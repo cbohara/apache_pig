@@ -24,3 +24,6 @@ dump update_order_ids;
 
 order_date = foreach orders generate username, product, quantity, ToDate(order_date, 'MM-dd-yyyy') as date;
 describe order_date;
+
+order_month = foreach order_date generate GetMonth(date);
+dump order_month;
