@@ -13,3 +13,6 @@ dump student_info;
 
 student_info_bag = foreach students generate TOTUPLE($0, $1, $2), $3;
 dump student_info_bag;
+
+unpack_student_info = foreach students generate name, contact.city, contact.phone;
+dump unpack_student_info;
