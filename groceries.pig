@@ -30,3 +30,14 @@ store groceries_subset into '/Users/cbohara/tools/pig-0.16.0/pluralsight/data/su
 groceries_order_bag = foreach groceries generate $0, $1, TOTUPLE($2, $4); -- TOTUPLE creates tuple with elements at index 2 and 4 from groceries relation
 describe groceries_order_bag;
 dump groceries_order_bag;
+
+groceries_no_datatype = load '/Users/cbohara/tools/pig-0.16.0/pluralsight/data/groceries.csv' using PigStorage()
+as
+(
+order_id,
+location,
+product,
+day,
+revenue
+); -- demo how pig will cast the datatype to each field
+describe groceries_no_datatype;
