@@ -16,3 +16,6 @@ dump student_grade_map;
 
 many_maps = foreach marks generate $0, TOMAP($1, $2), $3;
 dump many_maps;
+
+chem_marks = foreach marks generate name, marks#'Chemistry';
+dump chem_marks;
