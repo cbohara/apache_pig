@@ -22,8 +22,20 @@ dump order_numbers;
 update_order_ids = foreach orders generate REPLACE(order_id, 'o', 'order'), product;
 dump update_order_ids;
 
-order_date = foreach orders generate username, product, quantity, ToDate(order_date, 'MM-dd-yyyy') as date;
+order_date = foreach orders generate username, product, quantity, ToDate(order_date, 'MM-dd-yyyy') as date; -- convert chararray to datetime data type
 describe order_date;
 
 order_month = foreach order_date generate GetMonth(date);
 dump order_month;
+
+order_quant_filter = filter orders by quantity > 1; -- only return orders where the person purchased multiples of an item
+dump order_quant_filter;
+
+two_filters = filter orders by quantity > 1 and order_id > 'o5'; -- multiple filters using and
+dump two_filters;
+
+tv_orders = filter orders by product matches '.*tv'; -- use regex to find match ending with tv
+dump tv_orders;
+
+speaker_orders = filter orders by product matches '.*speakers*.';
+dump speaker_orders;
