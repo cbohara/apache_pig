@@ -34,4 +34,21 @@ revenue: chararray
 );
 
 names_self = join names by symbol, names2 by symbol;
-dump names_self;
+-- dump names_self;
+
+other_names = load '/Users/cbohara/tools/pig-0.16.0/pluralsight/data/other_names.csv' using PigStorage(',') as
+(
+symbol: chararray,
+name: chararray,
+revenue: chararray
+);
+-- describe names;
+-- describe other_names;
+
+all_names = union names, other_names;
+-- describe all_names;
+-- dump all_names;
+
+union_names_trades = union onschema names, trades;
+describe union_names_trades;
+dump union_names_trades;
