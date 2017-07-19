@@ -14,5 +14,13 @@ collisions_total = filter collisions_total_raw by borough is not null and reason
 -- dump collisions_total;
 
 collisions_total_group = group collisions_total by borough;
-describe collisions_total_group;
-dump collisions_total_group;
+-- describe collisions_total_group;
+-- dump collisions_total_group;
+
+collision_stats = foreach collisions_total_group {
+total_collisions = SUM(collisions_total.total);
+sorted_collisions = order collisions_total by total desc;
+highest_num_collisions = limit sorted_collisions 2;
+generate flatten(highest_num_collisions), total_collisions; -- flatten will unnest tuples
+}
+dump collision_stats;
