@@ -16,4 +16,4 @@ limit_borough = limit collisions_borough_group 2;
 -- dump limit_borough; -- limiting doesn't necessarily lead to insight because a bag contains so many records
 
 num_collisions_per_borough = foreach collisions_borough_group generate group, COUNT(collisions_reason_injured);
-dump num_collisions_per_borough;
+-- dump num_collisions_per_borough;
