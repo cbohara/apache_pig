@@ -1,3 +1,6 @@
+Download .tar.gz file from:
+http://apache.mirrors.ionfish.org/pig/
+
 ###############################################
 Apache Hadoop = distributed computing framework
 ###############################################
