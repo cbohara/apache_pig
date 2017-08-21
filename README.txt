@@ -100,28 +100,6 @@ loading data into relations
     lazy evaluation
         transformations not evaluated until display results to screen or store in file
 
-##############
-pig commands
-##############
-PigStorage()
-    built-in function
-    deserializes and reads data from disk
-    serializes and writes data to disk
-    writes to directory
-        _SUCCESS (MapReduce status output)
-        part-r-0000 (contains actual data)
-    directory cannot already exist
-    default = tab delimiter
-    pass in PigStorage(‘,’) for csv files
-
-describe
-    provides schema info
-
-foreach
-    iterates over every record in the relation
-    generates $[index number]
-    chooses certain fields we are interested in
-
 ###############
 pig data types
 ###############
@@ -203,6 +181,17 @@ avoid iterating over the dataset multiple times
 #################
 command wiki
 #################
+
+PigStorage()
+built-in function
+deserializes and reads data from disk
+serializes and writes data to disk
+writes to directory
+    _SUCCESS (MapReduce status output)
+    part-r-0000 (contains actual data)
+directory cannot already exist
+default = tab delimiter
+pass in PigStorage(‘,’) for csv files
 
 FOREACH GENERATE 
 works exactly like SELECT in SQL
