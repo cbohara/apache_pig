@@ -1,6 +1,7 @@
 lines = load '/Users/cbohara/tools/pig-0.16.0/pluralsight/data/words.txt' as (line: chararray);
 -- dump lines;
 
+log4j.logger.org.apache.pig=error, A
 word_bag = foreach lines generate TOKENIZE(line) as bag_of_words; -- TOKENIZE will split the line into a bag of words
 -- dump word_bag;
 

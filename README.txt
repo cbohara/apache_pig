@@ -119,7 +119,9 @@ foreach
     generates $[index number]
     chooses certain fields we are interested in
 
+###############
 pig data types
+###############
 complex
 collection types represent a group of entities
 tuple
@@ -194,3 +196,31 @@ do not want to iterate over all the records multiple times
 nested foreach
 combine multiple operations over the records of a dataset
 avoid iterating over the dataset multiple times
+
+#################
+command wiki
+#################
+
+FOREACH GENERATE 
+works exactly like SELECT in SQL
+new_relation = FOREACH relation_name GENERATE field;
+
+INDEXOF() 
+accepts a string value, a character, and an index #
+it returns the first occurance of the char in the string
+
+ex: file contains employee records 001,Robin,22,newyork
+emp_data = LOAD '../emp.txt' USING PigStorage as (id:int, name:chararray, age:int, city:chararray);
+# parse the name of each employee and return the index value at which the letter 'r' occurs the first time
+# if 'r' does not exist return -1
+indexof_data = FOREACH emp_data GENERATE (id,name), INDEXOF(name,'r',0);
+# result will be stored in relation
+dump indexof_data;
+> ((1,Robin),-1)
+> ((7,Robert),4)
+# can use FILTER to ensure that 'r' does not occur within the name
+contains_r = FILTER indexof_data BY INDEXOF(name, 'r', 0) < 0;
+# can use FILTER to ensure that 'r' does occur within the name
+no_r = FILTER indexof_data BY INDEXOF(name, 'r', 0) > 0;
+
+
