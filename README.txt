@@ -222,5 +222,3 @@ dump indexof_data;
 contains_r = FILTER indexof_data BY INDEXOF(name, 'r', 0) < 0;
 # can use FILTER to ensure that 'r' does occur within the name
 no_r = FILTER indexof_data BY INDEXOF(name, 'r', 0) > 0;
-
-
