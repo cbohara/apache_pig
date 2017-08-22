@@ -179,7 +179,7 @@ combine multiple operations over the records of a dataset
 avoid iterating over the dataset multiple times
 
 #################
-command wiki
+wiki
 #################
 
 PigStorage()
@@ -214,3 +214,39 @@ dump indexof_data;
 contains_r = FILTER indexof_data BY INDEXOF(name, 'r', 0) < 0;
 # can use FILTER to ensure that 'r' does occur within the name
 no_r = FILTER indexof_data BY INDEXOF(name, 'r', 0) > 0;
+
+SPLIT
+partitions a relation into 2+ relations
+ex:
+A = LOAD 'data' AS (f1:int,f2:int,f3:int);
+DUMP A;                
+(1,2,3)
+(4,5,6)
+(7,8,9)        
+SPLIT A INTO X IF f1<7, Y IF f2==5, Z IF (f3<6 OR f3>6);
+DUMP X;
+(1,2,3)
+(4,5,6)
+DUMP Y;
+(4,5,6)
+DUMP Z;
+(1,2,3)
+(7,8,9)
+
+relation::field is used to identify where the field came from for clarity
+
+STRSPLITTOBAG()
+function accepts a string that needs to be split, a regex, and an int value specifying the number of substrings that should be generated
+parses the string and when it encounters the regex it splits the string into a substring
+ex: 
+dump emp_data;
+--(001,Robin_Smith,22,newyork)
+
+-- split the first and last name of employee
+strsplittobag_data = FOREACH emp_data GENERATE (id,name), STRSPLITTOBAG (name,'_',2);
+
+-- will put STRSPLITTOBAG data into a bag
+((1,Robin_Smith),{(Robin),(Smith)})
+
+JOIN
+inner join is default
