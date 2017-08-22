@@ -257,4 +257,29 @@ pass in the number of tuples we want, the column name whos values are being comp
 TOP(topN,column,relation)
 ex:
 dump emp_details;
-001,Robin,22,newyork
+(001,Robin,22,newyork)
+age_group = Group emp_details BY age;
+dump age_group;
+(22,{(12,Kelly,22,Chennai),(7,Robert,22,newyork),(6,Maggy,22,Chennai),(1,Robin, 22,newyork)})
+age_top = FOREACH age_group {
+    -- grab the top 2 ids (in column 0) from the age_group relation
+    top = TOP(2, 0, age_group);
+    GENERATE top;
+}
+dump age_top;
+({(7,Robert,22,newyork),(12,Kelly,22,Chennai)})
+
+UNION
+merge the content of 2 relations
+dump student1;
+(001,Rajiv,Reddy,9848022337,Hyderabad)
+(002,siddarth,Battacharya,9848022338,Kolkata)
+dump student2;
+(003,Rajesh,Khanna,9848022339,Delhi)
+(004,Preethi,Agarwal,9848022330,Pune)
+student_union = UNION student1, student2;
+
+(001,Rajiv,Reddy,9848022337,Hyderabad)
+(002,siddarth,Battacharya,9848022338,Kolkata)
+(003,Rajesh,Khanna,9848022339,Delhi)
+(004,Preethi,Agarwal,9848022330,Pune)
