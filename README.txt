@@ -250,3 +250,11 @@ strsplittobag_data = FOREACH emp_data GENERATE (id,name), STRSPLITTOBAG (name,'_
 
 JOIN
 inner join is default
+
+TOP() 
+used to get the top N tuples of a bag
+pass in the number of tuples we want, the column name whos values are being compared, and the relation itself
+TOP(topN,column,relation)
+ex:
+dump emp_details;
+001,Robin,22,newyork
